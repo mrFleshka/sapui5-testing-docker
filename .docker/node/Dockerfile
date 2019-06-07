@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:10-alpine
 
 # install yarn
 RUN npm install --global yarn @ui5/cli node-env-run
