@@ -1,0 +1,20 @@
+{
+  "name": "mrfleshka.sapui5.testing",
+  "version": "1.0.0",
+  "description": "SAPUI5 Testing practice",
+  "main": "webapp/index.html",
+  "author": "Dmitriy Pelevin",
+  "license": "ISC",
+  "scripts": {
+    "start": "ui5 serve"
+  },
+  "dependencies": {
+    "@openui5/sap.m": "1.65.1",
+    "@openui5/sap.ui.core": "1.65.1",
+    "@openui5/sap.ui.layout": "1.65.1",
+    "@openui5/themelib_sap_belize": "1.65.1"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^1.5.0"
+  }
+}

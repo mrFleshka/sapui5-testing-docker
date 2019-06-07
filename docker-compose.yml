@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  nginx:
+    image: 'nginx:latest'
+    container_name: testing-sapui5-nginx
+    depends_on:
+      - node
+    volumes:
+      - './.docker/nginx/conf:/etc/nginx/conf.d'
+      - './.docker/nginx/logs:/var/log/nginx'
+    environment:
+      - TZ=Europe/Moscow
+    networks:
+      development:
+        aliases:
+          - testing.sapui5.test
+      proxy-pass:
+        aliases:
+          - nginx
+  node:
+    build:
+      context: .
+      dockerfile: ./.docker/node/Dockerfile
+    container_name: testing-sapui5-node
+    command: ["ui5", "serve", "-p", "8085", "--accept-remote-connections"]
+    environment:
+      - TZ=Europe/Moscow
+    volumes:
+      - '.:/var/www/app'
+    networks:
+      proxy-pass:
+        aliases:
+          - node
+networks:
+  proxy-pass:
+  development:
+    external:
+      name: develope

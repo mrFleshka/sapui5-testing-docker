@@ -1,0 +1,4 @@
+specVersion: '1.0'
+type: application
+metadata:
+  name: mrfleshka-sapui5-testing
