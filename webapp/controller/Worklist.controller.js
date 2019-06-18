@@ -3,8 +3,10 @@ sap.ui.define([
     'sap/ui/model/json/JSONModel',
     '../model/formatter',
     '../model/FlaggedType',
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
     'sap/m/library'
-], function (BaseController, JSONModel, formatter, FlaggedType, mobileLibrary) {
+], function (BaseController, JSONModel, formatter, FlaggedType, Filter, FilterOperator, mobileLibrary) {
     "use strict";
 
     return BaseController.extend("sap.ui.demo.bulletinboard.controller.Worklist", {
@@ -76,6 +78,20 @@ sap.ui.define([
                 sTitle = this.getResourceBundle().getText("worklistTableTitle");
             }
             this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
+        },
+
+        onFilterPosts: function (oEvent) {
+            // build filter array
+            var aFilter = [];
+            var sQuery = oEvent.getParameter("query");
+            if (sQuery) {
+                aFilter.push(new Filter("Title", FilterOperator.Contains, sQuery));
+            }
+
+            // filter binding
+            var oTable = this.byId("table");
+            var oBinding = oTable.getBinding("items");
+            oBinding.filter(aFilter);
         },
 
         /* =========================================================== */
